@@ -33,3 +33,29 @@ loop
 	exitwhen ${1:true}
 	$0 
 endloop
+#t=Simple SelectUnit
+#g=select
+call GroupEnumUnitsInRange(${1:s_group},${2:s_x},${3:s_y},${4:radius}+128.,null)
+loop
+    set ${5:s_unit}=FirstOfGroup(${1:s_group})
+    exitwhen ${5:s_unit}==null
+    call GroupRemoveUnit(${1:s_group},${5:s_unit})
+    if IsUnitInRangeXY(${5:s_unit},${2:s_x},${3:s_y},${4:radius}) then
+		$0
+    endif
+endloop
+#t=Fan SelectUnit
+#g=selectf
+call GroupEnumUnitsInRange(${1:s_group2},GetUnitX(${2:whitchunit}),GetUnitY(${2:whitchunit}),${3:radius}+128,null)
+loop
+    set s_unit2=FirstOfGroup(${1:s_group2})
+    exitwhen s_unit2==null
+    call GroupRemoveUnit(${1:s_group2},s_unit2)
+    if IsUnitInRangeXY(s_unit2,,GetUnitX(${2:whitchunit}),,GetUnitY(${2:whitchunit}),${3:radius}) and c_booleanunit(${4:whitchhero},s_unit2) and c_isface2(${4:whitchhero},s_unit2,bj_DEGTORAD*GetUnitFacing(${4:whitchhero}),120) then
+		$0
+    endif
+endloop
+#t=Fan Effect
+#g=fan
+call x_effect(x_time(x_scale(x_unit2(GetUnitX(${1:whitchunit})+370*CosBJ(GetUnitFacing(${1:whitchunit})),GetUnitY(${1:whitchunit})+370*SinBJ(GetUnitFacing(${1:whitchunit})),GetUnitFacing(${1:whitchunit})),${2:proportion}),${3:time}),${4:whitcheffect})
+$0

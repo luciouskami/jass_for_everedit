@@ -5,3 +5,5 @@ jass.ezip
 *.sqlite
 /.vscode/launch.json
 /jass_for_everedit/jasshelper/zincmanual.html
+/.vs/jass_for_everedit/v15/.suo
+/.vs/VSWorkspaceState.json
